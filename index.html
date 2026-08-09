@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -263,41 +264,6 @@ navy);letter-spacing:.01em;margin:0 0 18px}
 @media(max-width:900px){.people-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.people-grid{grid-template-columns:repeat(2,1fr)}}
 
-
-/* ===== Research page-specific styles ===== */
-.research-body{max-width:1240px;margin:0 auto;padding:44px 64px 64px}
-.research-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:34px;align-items:start}
-.research-filters{position:sticky;top:88px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 12px;box-shadow:0 5px 18px rgba(3,35,66,.035)}
-.research-filter-row{display:flex;flex-direction:column;align-items:stretch;gap:3px;margin-bottom:14px;padding-bottom:13px;border-bottom:1px solid var(--line)}
-.research-filter-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:0}
-.research-filter-label{font-size:10.5px;font-weight:800;color:var(--muted);padding:3px 8px 7px;text-transform:uppercase;letter-spacing:.08em}
-.research-chip{width:100%;text-align:left;font-size:11.5px;line-height:1.3;padding:6px 9px;border-radius:7px;border:1px solid transparent;color:var(--muted);cursor:pointer;background:transparent;transition:background .15s,border-color .15s,color .15s}
-.research-chip:hover{background:#fff;border-color:var(--line);color:var(--navy-2)}
-.research-chip.active{background:var(--navy);border-color:var(--navy);color:#fff}
-.research-count{font-size:12px;color:var(--muted);margin-bottom:14px}
-.research-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.research-card-tags{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 13px}
-.research-tag{display:inline-flex;align-items:center;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:4px 8px;background:#fff}
-.research-tag.format{color:var(--cyan);background:rgba(73,217,239,.08)}
-.research-tag.domain{color:var(--blue);background:rgba(38,120,217,.07)}
-.research-tag.theme{color:var(--maroon);background:rgba(158,11,51,.06)}
-.research-empty{padding:40px;text-align:center;color:var(--muted);font-size:14px}
-@media(max-width:1040px){
-  .research-layout{grid-template-columns:170px minmax(0,1fr)}
-  .research-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:760px){
-  .research-layout{grid-template-columns:1fr}
-  .research-filters{position:static;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:14px}
-  .research-filter-row{margin:0;padding:0;border:0}
-  .research-cards{grid-template-columns:1fr}
-}
-@media(max-width:560px){
-  .research-filters{grid-template-columns:1fr}
-  .research-body{padding-left:24px;padding-right:24px}
-}  
-
-  
 /* ===== beyond page-specific styles ===== */
 color:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 @media(max-width:900px){.subpage-hero,.subpage-body{padding-left:24px;padding-right:24px}}
@@ -483,6 +449,265 @@ lor:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 
 .es-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:900px){.es-grid{grid-template-columns:1fr}}
+
+
+/* ===== Emerging Signals category layout ===== */
+.signal-category{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:30px 32px;
+  margin-bottom:24px;
+  box-shadow:0 8px 24px rgba(16,45,80,.045);
+}
+.signal-category-header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:12px;
+}
+.signal-category-number{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 34px;
+  background:#e9f7fb;
+  border:1px solid #b8e6ef;
+  color:#08778b;
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:.04em;
+}
+.signal-category-kicker{
+  color:var(--muted);
+  font-size:9.5px;
+  font-weight:850;
+  letter-spacing:.12em;
+  margin-bottom:2px;
+}
+.signal-category h2{
+  color:var(--navy);
+  font-size:22px;
+  margin:0;
+  letter-spacing:-.02em;
+}
+.signal-category-intro{
+  max-width:920px;
+  color:#4f6278;
+  font-size:13px;
+  line-height:1.7;
+  margin:0 0 22px 48px;
+}
+.vocabulary-grid{
+  margin-left:48px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.vocabulary-item{
+  display:grid;
+  grid-template-columns:30px 1fr;
+  gap:10px;
+  padding:15px 16px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fbfdff;
+}
+.vocabulary-index{
+  width:25px;
+  height:25px;
+  border-radius:7px;
+  background:#edf3fc;
+  color:#2865a9;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:9px;
+  font-weight:850;
+}
+.vocabulary-item strong{
+  display:block;
+  color:var(--navy);
+  font-size:13px;
+  margin-bottom:3px;
+}
+.vocabulary-item p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45;
+  margin:0;
+}
+.money-box .signal-category-number{
+  background:#f4f0f8;
+  border-color:#ddd2e7;
+  color:#705183;
+}
+.money-box .sankey-wrap{
+  margin:4px 0 0 48px;
+  border-color:#e0e7ef;
+}
+.survey-box .signal-category-number{
+  background:#edf3fc;
+  border-color:#c9d9ef;
+  color:#2865a9;
+}
+.survey-box .es-grid{
+  margin-left:48px;
+}
+.survey-box .es-panel{
+  height:100%;
+}
+@media(max-width:760px){
+  .signal-category{padding:24px 20px}
+  .signal-category-intro,
+  .vocabulary-grid,
+  .money-box .sankey-wrap,
+  .survey-box .es-grid{
+    margin-left:0;
+  }
+  .vocabulary-grid{grid-template-columns:1fr}
+}
+
+
+/* ===== Emerging Signals dashboard layout ===== */
+.es-body{
+  max-width:1180px;
+  margin:0 auto;
+  padding:44px 64px 64px;
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(360px,.82fr);
+  grid-template-areas:
+    "vocabulary money"
+    "survey survey";
+  gap:22px;
+  align-items:start;
+}
+.signal-category{
+  margin:0;
+  min-width:0;
+  padding:26px 28px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(16,45,80,.045);
+}
+.vocabulary-box{grid-area:vocabulary;min-height:100%}
+.money-box{grid-area:money}
+.survey-box{grid-area:survey}
+
+.signal-category-header{
+  display:block;
+  margin-bottom:12px;
+}
+.signal-category h2{
+  font-size:21px;
+  margin:0;
+}
+.signal-category-intro{
+  margin:0 0 20px;
+  max-width:none;
+  font-size:12.5px;
+  line-height:1.65;
+}
+
+.vocabulary-grid{
+  margin:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+.vocabulary-item{
+  min-height:94px;
+  padding:13px 14px;
+  background:#fbfdff;
+}
+.vocabulary-index{
+  width:22px;
+  height:22px;
+  font-size:8px;
+}
+.vocabulary-item strong{font-size:12px}
+.vocabulary-item p{font-size:11.5px}
+
+.money-box{
+  background:linear-gradient(180deg,#fff 0%,#fbfdff 100%);
+}
+.money-box .sankey-wrap{
+  margin:0;
+  padding:18px 16px 15px;
+  border-radius:10px;
+}
+.money-box .sankey-wrap h2{font-size:16px}
+.money-box .sankey-wrap .sub{font-size:11px;margin-bottom:12px}
+.money-box .sankey-wrap svg{
+  height:auto;
+  min-height:300px;
+}
+.money-box .sankey-legend{
+  gap:9px 12px;
+  margin-top:10px;
+  font-size:10px;
+}
+
+.survey-box{
+  padding:24px 28px 28px;
+}
+.survey-box .signal-category-header{
+  margin-bottom:8px;
+}
+.survey-box .signal-category-intro{
+  margin-bottom:17px;
+}
+.survey-box .es-grid{
+  margin:0;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:16px;
+}
+.survey-box .es-panel{
+  padding:19px 20px;
+  border-radius:10px;
+}
+.survey-box .es-panel h3{
+  font-size:11px;
+  letter-spacing:.08em;
+}
+.survey-box .question{font-size:13px}
+.survey-box .whatif{
+  display:grid;
+  grid-template-columns:42px 1fr;
+  gap:14px;
+  align-items:start;
+}
+.survey-box .whatif .bubble{
+  margin:0;
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+@media(max-width:900px){
+  .es-body{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "vocabulary"
+      "money"
+      "survey";
+    padding-left:32px;
+    padding-right:32px;
+  }
+}
+@media(max-width:600px){
+  .es-body{padding:30px 20px 50px}
+  .vocabulary-grid{grid-template-columns:1fr}
+  .survey-box .es-grid{grid-template-columns:1fr}
+  .survey-box .whatif{display:block}
+  .survey-box .whatif .bubble{margin-bottom:10px}
+}
 
 /* ===== events page-specific styles ===== */
 navy);letter-spacing:.01em;margin:0 0 18px}
@@ -1118,7 +1343,48 @@ or:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 
 <div class="es-body">
 
-  <div class="sankey-wrap">
+  <section class="signal-category vocabulary-box">
+    <div class="signal-category-header">
+      <div>
+        <h2>New Vocabulary</h2>
+      </div>
+    </div>
+    <p class="signal-category-intro">
+      Words are a strong indicator of behavioral and cultural changes, making a journey from niche to mainstream use.
+      Every generation has their own unique meanings applied to words&mdash;some persist and others are discarded quickly.
+      Indicators of changes include new words being adopted, existing words changing meaning, and words being combined to convey complex processes.
+      Current language indicators include:
+    </p>
+    <div class="vocabulary-grid">
+      <div class="vocabulary-item">
+        <span class="vocabulary-index">01</span>
+        <div><strong>Personification of AI roles</strong><p>Companion, assistant, copilot, coach</p></div>
+      </div>
+      <div class="vocabulary-item">
+        <span class="vocabulary-index">02</span>
+        <div><strong>New verb meaning</strong><p>&ldquo;I prompted it&rdquo; or &ldquo;I AI&rsquo;d it&rdquo;</p></div>
+      </div>
+      <div class="vocabulary-item">
+        <span class="vocabulary-index">03</span>
+        <div><strong>Out of vogue</strong><p>&ldquo;I Googled it&rdquo;</p></div>
+      </div>
+      <div class="vocabulary-item">
+        <span class="vocabulary-index">04</span>
+        <div><strong>New phrases</strong><p>&ldquo;Human out of the loop&rdquo;</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="signal-category money-box">
+    <div class="signal-category-header">
+      <div>
+        <h2>Follow the Money</h2>
+      </div>
+    </div>
+    <p class="signal-category-intro">
+      Capital flows can reveal where expectations, strategic priorities, and technological bets are accumulating before they become obvious in headlines or mainstream adoption.
+    </p>
+      <div class="sankey-wrap">
     <h2>Private Funding: Where Capital Is Flowing</h2>
     <p class="sub">Estimated private and public investment by source, across five emerging-technology domains ($B, illustrative).</p>
     <svg viewBox="0 0 900 480" width="100%" height="480" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
@@ -1180,31 +1446,42 @@ or:var(--navy);letter-spacing:.01em;margin:0 0 18px}
       <span><i style="background:#9E0B33"></i>Government Grants</span>
       <span><i style="background:#b48a3b"></i>Sovereign Wealth</span>
     </div>
-  </div>
+  </section>
 
-  <div class="es-grid">
-    <section class="es-panel">
-      <h3>PREDICTION CHECK</h3>
-      <div class="question">When will frontier AI models require national licensing in the U.S.?</div>
-      <div class="poll-item"><span>By 2026</span><b>18%</b><div class="track"><span style="width:18%"></span></div></div>
-      <div class="poll-item"><span>2027&ndash;2028</span><b>34%</b><div class="track"><span style="width:34%"></span></div></div>
-      <div class="poll-item"><span>2029&ndash;2030</span><b>27%</b><div class="track"><span style="width:27%"></span></div></div>
-      <div class="poll-item"><span>After 2030</span><b>14%</b><div class="track"><span style="width:14%"></span></div></div>
-      <div class="poll-item"><span>Never</span><b>7%</b><div class="track"><span style="width:7%"></span></div></div>
-      <div class="small-note">Vote to compare your forecast with other visitors.</div>
-      <a class="vote" href="#" onclick="event.preventDefault();alert('Thanks for voting in this mock-up.')">Vote Now &#8594;</a>
-    </section>
-
-    <section class="es-panel whatif">
-      <div class="bubble">?</div>
+  <section class="signal-category survey-box">
+    <div class="signal-category-header">
       <div>
-        <h3>SUBMIT A WHAT IF?</h3>
-        <div class="small-note">Have a question about the future of technology? Submit your What If? for our researchers to explore.</div>
-        <textarea placeholder="What if...?" style="width:100%;min-height:56px;margin-top:10px;padding:9px 11px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:13px;resize:vertical"></textarea>
-        <button onclick="alert('Thanks for submitting your What If? to this mock-up.')">Submit a What If? &#8594;</button>
+        <h2>Test the Future</h2>
       </div>
-    </section>
-  </div>
+    </div>
+    <p class="signal-category-intro">
+      Put your own expectations on the record, or send a question for the Tech Futures Lab to explore.
+    </p>
+
+    <div class="es-grid">
+      <section class="es-panel">
+        <h3>PREDICTION CHECK</h3>
+        <div class="question">When will frontier AI models require national licensing in the U.S.?</div>
+        <div class="poll-item"><span>By 2026</span><b>18%</b><div class="track"><span style="width:18%"></span></div></div>
+        <div class="poll-item"><span>2027&ndash;2028</span><b>34%</b><div class="track"><span style="width:34%"></span></div></div>
+        <div class="poll-item"><span>2029&ndash;2030</span><b>27%</b><div class="track"><span style="width:27%"></span></div></div>
+        <div class="poll-item"><span>After 2030</span><b>14%</b><div class="track"><span style="width:14%"></span></div></div>
+        <div class="poll-item"><span>Never</span><b>7%</b><div class="track"><span style="width:7%"></span></div></div>
+        <div class="small-note">Vote to compare your forecast with other visitors.</div>
+        <a class="vote" href="#" onclick="event.preventDefault();alert('Thanks for voting in this mock-up.')">Vote Now &#8594;</a>
+      </section>
+
+      <section class="es-panel whatif">
+        <div class="bubble">?</div>
+        <div>
+          <h3>SUBMIT A WHAT IF?</h3>
+          <div class="small-note">Have a question about the future of technology? Submit your What If? for our researchers to explore.</div>
+          <textarea placeholder="What if...?" style="width:100%;min-height:100px;margin-top:10px;padding:9px 11px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:13px;resize:vertical"></textarea>
+          <button onclick="alert('Thanks for submitting your What If? to this mock-up.')">Submit a What If? &#8594;</button>
+        </div>
+      </section>
+    </div>
+  </section>
 
 </div>
 </div>
