@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -591,12 +592,11 @@ lor:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 .vocab-example{font-size:14px;color:var(--ink)}
 .vocab-example em{color:var(--muted);font-style:italic}
 @media(max-width:640px){.vocab-item{grid-template-columns:1fr;gap:4px}}
-.surveys-box{border:1px solid var(--line);border-radius:12px;padding:28px;background:#fff;margin-bottom:44px}
-.surveys-box h2{font-size:19px;color:var(--navy);margin:0 0 4px}
-.surveys-box .sub{color:var(--muted);font-size:13px;margin:0 0 22px}
-.surveys-box .es-grid{margin:0}
 
 .es-dashboard{display:grid;grid-template-columns:1fr 1.3fr;gap:20px;align-items:start;margin-bottom:20px}
+.es-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.es-split .signal-box{margin-bottom:0}
+@media(max-width:820px){.es-split{grid-template-columns:1fr}}
 .es-dashboard .signal-box,.es-dashboard .sankey-wrap{margin-bottom:0}
 @media(max-width:900px){.es-dashboard{grid-template-columns:1fr}}
 
@@ -1418,58 +1418,58 @@ or:var(--navy);letter-spacing:.01em;margin:0 0 18px}
   <div class="sankey-wrap">
     <h2>Follow the Money</h2>
     <p class="sub">Estimated private and public investment by source, across five emerging-technology domains ($B, illustrative).</p>
-    <svg viewBox="0 0 900 480" width="100%" height="480" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+    <svg viewBox="0 0 900 340" width="100%" height="340" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
 <defs>
-<linearGradient id="grad-VentureCapital" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A8CBF0" stop-opacity="0.55"/><stop offset="1" stop-color="#A8CBF0" stop-opacity="0.22"/></linearGradient>
+<linearGradient id="grad-VentureCapital" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#49d9ef" stop-opacity="0.55"/><stop offset="1" stop-color="#49d9ef" stop-opacity="0.22"/></linearGradient>
 <linearGradient id="grad-CorporateInvestment" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2678d9" stop-opacity="0.55"/><stop offset="1" stop-color="#2678d9" stop-opacity="0.22"/></linearGradient>
 <linearGradient id="grad-GovernmentGrants" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9E0B33" stop-opacity="0.55"/><stop offset="1" stop-color="#9E0B33" stop-opacity="0.22"/></linearGradient>
 <linearGradient id="grad-SovereignWealth" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b48a3b" stop-opacity="0.55"/><stop offset="1" stop-color="#b48a3b" stop-opacity="0.22"/></linearGradient>
 </defs>
-<path d="M186,20 C460.0,20 460.0,20 734,20 L734,116.0 C460.0,116.0 460.0,118.39999999999999 186,118.39999999999999 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; AI: $24B</title></path>
-<path d="M186,118.39999999999999 C460.0,118.39999999999999 460.0,214.0 734,214.0 L734,254.0 C460.0,254.0 460.0,159.39999999999998 186,159.39999999999998 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Biotech: $10B</title></path>
-<path d="M186,159.39999999999998 C460.0,159.39999999999998 460.0,390.0 734,390.0 L734,402.0 C460.0,402.0 460.0,171.7 186,171.7 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Quantum: $3B</title></path>
-<path d="M186,171.7 C460.0,171.7 460.0,320.0 734,320.0 L734,336.0 C460.0,336.0 460.0,188.1 186,188.1 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Semiconductors: $4B</title></path>
-<path d="M186,188.1 C460.0,188.1 460.0,436.0 734,436.0 L734,440.0 C460.0,440.0 460.0,192.2 186,192.2 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Space: $1B</title></path>
-<path d="M186,202.2 C460.0,202.2 460.0,116.0 734,116.0 L734,164.0 C460.0,164.0 460.0,251.39999999999998 186,251.39999999999998 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; AI: $12B</title></path>
-<path d="M186,251.39999999999998 C460.0,251.39999999999998 460.0,336.0 734,336.0 L734,368.0 C460.0,368.0 460.0,284.2 186,284.2 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Semiconductors: $8B</title></path>
-<path d="M186,284.2 C460.0,284.2 460.0,254.0 734,254.0 L734,270.0 C460.0,270.0 460.0,300.59999999999997 186,300.59999999999997 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Biotech: $4B</title></path>
-<path d="M186,300.6 C460.0,300.6 460.0,440.0 734,440.0 L734,448.0 C460.0,448.0 460.0,308.8 186,308.8 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Space: $2B</title></path>
-<path d="M186,308.8 C460.0,308.8 460.0,402.0 734,402.0 L734,410.0 C460.0,410.0 460.0,317.0 186,317.0 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Quantum: $2B</title></path>
-<path d="M186,327.0 C460.0,327.0 460.0,410.0 734,410.0 L734,422.0 C460.0,422.0 460.0,339.3 186,339.3 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Quantum: $3B</title></path>
-<path d="M186,339.3 C460.0,339.3 460.0,368.0 734,368.0 L734,380.0 C460.0,380.0 460.0,351.6 186,351.6 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Semiconductors: $3B</title></path>
-<path d="M186,351.6 C460.0,351.6 460.0,448.0 734,448.0 L734,460.0 C460.0,460.0 460.0,363.90000000000003 186,363.90000000000003 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Space: $3B</title></path>
-<path d="M186,363.9 C460.0,363.9 460.0,164.0 734,164.0 L734,180.0 C460.0,180.0 460.0,380.29999999999995 186,380.29999999999995 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; AI: $4B</title></path>
-<path d="M186,380.3 C460.0,380.3 460.0,270.0 734,270.0 L734,294.0 C460.0,294.0 460.0,404.90000000000003 186,404.90000000000003 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Biotech: $6B</title></path>
-<path d="M186,414.9 C460.0,414.9 460.0,180.0 734,180.0 L734,204.0 C460.0,204.0 460.0,439.5 186,439.5 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; AI: $6B</title></path>
-<path d="M186,439.5 C460.0,439.5 460.0,294.0 734,294.0 L734,310.0 C460.0,310.0 460.0,455.9 186,455.9 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; Biotech: $4B</title></path>
-<path d="M186,455.9 C460.0,455.9 460.0,422.0 734,422.0 L734,426.0 C460.0,426.0 460.0,460.0 186,460.0 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; Quantum: $1B</title></path>
-<rect x="170" y="20.0" width="16" height="172.2" rx="3" fill="#A8CBF0"/>
-<text x="156" y="106.1" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Venture Capital</text>
-<text x="156" y="121.1" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$42B</text>
-<rect x="170" y="202.2" width="16" height="114.8" rx="3" fill="#2678d9"/>
-<text x="156" y="259.6" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Corporate Investment</text>
-<text x="156" y="274.6" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$28B</text>
-<rect x="170" y="327.0" width="16" height="77.9" rx="3" fill="#9E0B33"/>
-<text x="156" y="365.9" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Government Grants</text>
-<text x="156" y="380.9" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$19B</text>
-<rect x="170" y="414.9" width="16" height="45.1" rx="3" fill="#b48a3b"/>
-<text x="156" y="437.4" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Sovereign Wealth</text>
-<text x="156" y="452.4" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$11B</text>
-<rect x="734" y="20.0" width="16" height="184.0" rx="3" fill="#032342"/>
-<text x="764" y="112.0" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">AI</text>
-<text x="764" y="127.0" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$46B</text>
-<rect x="734" y="214.0" width="16" height="96.0" rx="3" fill="#032342"/>
-<text x="764" y="262.0" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Biotech</text>
-<text x="764" y="277.0" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$24B</text>
-<rect x="734" y="320.0" width="16" height="60.0" rx="3" fill="#032342"/>
-<text x="764" y="350.0" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Semiconductors</text>
-<text x="764" y="365.0" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$15B</text>
-<rect x="734" y="390.0" width="16" height="36.0" rx="3" fill="#032342"/>
-<text x="764" y="408.0" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Quantum</text>
-<text x="764" y="423.0" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$9B</text>
-<rect x="734" y="436.0" width="16" height="24.0" rx="3" fill="#032342"/>
-<text x="764" y="448.0" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Space</text>
-<text x="764" y="463.0" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$6B</text>
+<path d="M186,14 C460.0,14 460.0,14 734,14 L734,81.2 C460.0,81.2 460.0,83.12 186,83.12 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; AI: $24B</title></path>
+<path d="M186,83.12 C460.0,83.12 460.0,150.8 734,150.8 L734,178.8 C460.0,178.8 460.0,111.92 186,111.92 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Biotech: $10B</title></path>
+<path d="M186,111.92 C460.0,111.92 460.0,276.0 734,276.0 L734,284.4 C460.0,284.4 460.0,120.56 186,120.56 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Quantum: $3B</title></path>
+<path d="M186,120.56 C460.0,120.56 460.0,226.0 734,226.0 L734,237.2 C460.0,237.2 460.0,132.08 186,132.08 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Semiconductors: $4B</title></path>
+<path d="M186,132.07999999999998 C460.0,132.07999999999998 460.0,309.2 734,309.2 L734,312.0 C460.0,312.0 460.0,134.95999999999998 186,134.95999999999998 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Space: $1B</title></path>
+<path d="M186,142.95999999999998 C460.0,142.95999999999998 460.0,81.2 734,81.2 L734,114.80000000000001 C460.0,114.80000000000001 460.0,177.51999999999998 186,177.51999999999998 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; AI: $12B</title></path>
+<path d="M186,177.51999999999998 C460.0,177.51999999999998 460.0,237.2 734,237.2 L734,259.59999999999997 C460.0,259.59999999999997 460.0,200.55999999999997 186,200.55999999999997 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Semiconductors: $8B</title></path>
+<path d="M186,200.55999999999997 C460.0,200.55999999999997 460.0,178.8 734,178.8 L734,190.0 C460.0,190.0 460.0,212.07999999999998 186,212.07999999999998 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Biotech: $4B</title></path>
+<path d="M186,212.07999999999998 C460.0,212.07999999999998 460.0,312.0 734,312.0 L734,317.6 C460.0,317.6 460.0,217.83999999999997 186,217.83999999999997 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Space: $2B</title></path>
+<path d="M186,217.83999999999997 C460.0,217.83999999999997 460.0,284.4 734,284.4 L734,290.0 C460.0,290.0 460.0,223.59999999999997 186,223.59999999999997 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Quantum: $2B</title></path>
+<path d="M186,231.6 C460.0,231.6 460.0,290.0 734,290.0 L734,298.4 C460.0,298.4 460.0,240.24 186,240.24 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Quantum: $3B</title></path>
+<path d="M186,240.24 C460.0,240.24 460.0,259.6 734,259.6 L734,268.0 C460.0,268.0 460.0,248.88 186,248.88 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Semiconductors: $3B</title></path>
+<path d="M186,248.88 C460.0,248.88 460.0,317.59999999999997 734,317.59999999999997 L734,325.99999999999994 C460.0,325.99999999999994 460.0,257.52 186,257.52 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Space: $3B</title></path>
+<path d="M186,257.52 C460.0,257.52 460.0,114.80000000000001 734,114.80000000000001 L734,126.00000000000001 C460.0,126.00000000000001 460.0,269.03999999999996 186,269.03999999999996 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; AI: $4B</title></path>
+<path d="M186,269.03999999999996 C460.0,269.03999999999996 460.0,190.0 734,190.0 L734,206.8 C460.0,206.8 460.0,286.31999999999994 186,286.31999999999994 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Biotech: $6B</title></path>
+<path d="M186,294.32 C460.0,294.32 460.0,126.00000000000001 734,126.00000000000001 L734,142.8 C460.0,142.8 460.0,311.6 186,311.6 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; AI: $6B</title></path>
+<path d="M186,311.6 C460.0,311.6 460.0,206.8 734,206.8 L734,218.0 C460.0,218.0 460.0,323.12 186,323.12 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; Biotech: $4B</title></path>
+<path d="M186,323.12 C460.0,323.12 460.0,298.4 734,298.4 L734,301.2 C460.0,301.2 460.0,326.0 186,326.0 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; Quantum: $1B</title></path>
+<rect x="170" y="14.0" width="16" height="121.0" rx="3" fill="#49d9ef"/>
+<text x="156" y="74.5" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Venture Capital</text>
+<text x="156" y="88.5" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$42B</text>
+<rect x="170" y="143.0" width="16" height="80.6" rx="3" fill="#2678d9"/>
+<text x="156" y="183.3" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Corporate Investment</text>
+<text x="156" y="197.3" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$28B</text>
+<rect x="170" y="231.6" width="16" height="54.7" rx="3" fill="#9E0B33"/>
+<text x="156" y="259.0" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Government Grants</text>
+<text x="156" y="273.0" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$19B</text>
+<rect x="170" y="294.3" width="16" height="31.7" rx="3" fill="#b48a3b"/>
+<text x="156" y="310.2" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Sovereign Wealth</text>
+<text x="156" y="324.2" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$11B</text>
+<rect x="734" y="14.0" width="16" height="128.8" rx="3" fill="#032342"/>
+<text x="764" y="78.4" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">AI</text>
+<text x="764" y="92.4" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$46B</text>
+<rect x="734" y="150.8" width="16" height="67.2" rx="3" fill="#032342"/>
+<text x="764" y="184.4" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Biotech</text>
+<text x="764" y="198.4" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$24B</text>
+<rect x="734" y="226.0" width="16" height="42.0" rx="3" fill="#032342"/>
+<text x="764" y="247.0" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Semiconductors</text>
+<text x="764" y="261.0" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$15B</text>
+<rect x="734" y="276.0" width="16" height="25.2" rx="3" fill="#032342"/>
+<text x="764" y="288.6" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Quantum</text>
+<text x="764" y="302.6" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$9B</text>
+<rect x="734" y="309.2" width="16" height="16.8" rx="3" fill="#032342"/>
+<text x="764" y="317.6" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Space</text>
+<text x="764" y="331.6" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$6B</text>
 </svg>
     <div class="sankey-legend">
       <span><i style="background:#A8CBF0"></i>Venture Capital</span>
@@ -1481,9 +1481,8 @@ or:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 
   </div>
 
-  <div class="surveys-box">
-    <div class="es-grid">
-      <section class="es-panel">
+  <div class="es-split">
+      <section class="es-panel signal-box">
         <h2>Prediction Check</h2>
         <div class="question">When will frontier AI models require national licensing in the U.S.?</div>
         <div class="poll-item"><span>By 2026</span><b>18%</b><div class="track"><span style="width:18%"></span></div></div>
@@ -1495,7 +1494,7 @@ or:var(--navy);letter-spacing:.01em;margin:0 0 18px}
         <a class="vote" href="#" onclick="event.preventDefault();alert('Thanks for voting in this mock-up.')">Vote Now &#8594;</a>
       </section>
 
-      <section class="es-panel whatif">
+      <section class="es-panel whatif signal-box">
         <div class="bubble">?</div>
         <div>
           <h2>Submit a "What If...?"</h2>
@@ -1504,7 +1503,6 @@ or:var(--navy);letter-spacing:.01em;margin:0 0 18px}
           <button onclick="alert('Thanks for submitting your What If? to this mock-up.')">Submit a What If? &#8594;</button>
         </div>
       </section>
-    </div>
   </div>
 
 </div>
@@ -1665,9 +1663,22 @@ function render(){
     (!state.domain || it.domain === state.domain) &&
     (!state.theme || it.theme === state.theme)
   );
-  filtered = filtered.slice().sort((a,b) => b.date.localeCompare(a.date));
+  const featuredResearchOrder = [
+    "Inaugural Retreat Highlights: Exploring Unprecedented Futures",
+    "Anticipating and Navigating Strategic Technological Surprise"
+  ];
+  filtered = filtered.slice().sort((a,b) => {
+    const aFeatured = featuredResearchOrder.indexOf(a.title);
+    const bFeatured = featuredResearchOrder.indexOf(b.title);
+    if (aFeatured !== -1 || bFeatured !== -1) {
+      if (aFeatured === -1) return 1;
+      if (bFeatured === -1) return -1;
+      return aFeatured - bFeatured;
+    }
+    return b.date.localeCompare(a.date);
+  });
 
-  countEl.textContent = filtered.length + (filtered.length === 1 ? " result" : " results") + ", newest first";
+  countEl.textContent = filtered.length + (filtered.length === 1 ? " result" : " results") + ", featured first";
   grid.innerHTML = '';
   empty.style.display = filtered.length ? 'none' : 'block';
 
