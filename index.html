@@ -1,10 +1,10 @@
-
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tech Futures Lab</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <style>
 :root {
   --navy:#032342;
@@ -114,7 +114,7 @@ select{border:1px solid var(--line);padding:9px 30px 9px 11px;border-radius:7px;
 a.card{display:block;text-decoration:none;color:inherit}
 .kicker{font-size:11px;font-weight:850;color:var(--blue);text-transform:uppercase;letter-spacing:.035em}
 .kicker.gold{color:var(--gold)}
-.card h3{font:700 24px/1.05 Georgia,serif;margin:10px 0}
+.card h3{font:700 24px/1.05 Inter,sans-serif;margin:10px 0}
 .card p{font-size:14px;color:#506680;margin:0 0 16px}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
 .tag{font-size:10px;border:1px solid var(--line);border-radius:999px;padding:4px 9px}
@@ -125,7 +125,7 @@ a.card{display:block;text-decoration:none;color:inherit}
 .sidebar{display:grid;gap:16px;align-content:start}
 .panel{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff;box-shadow:0 5px 18px rgba(13,42,75,.035)}
 .panel h3{font-size:18px;margin:0 0 14px}
-.question{font:700 19px/1.25 Georgia,serif;margin-bottom:14px}
+.question{font:700 19px/1.25 Inter,sans-serif;margin-bottom:14px}
 .poll-item{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:10px 0;font-size:12px}
 .track{grid-column:1;height:5px;border-radius:999px;background:#e8eef4;overflow:hidden}
 .track span{display:block;height:100%;background:linear-gradient(90deg,var(--navy),var(--cyan))}
@@ -138,7 +138,7 @@ a.card{display:block;text-decoration:none;color:inherit}
 .mention{display:grid;grid-template-columns:48px 1fr auto;gap:11px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
 .mention:last-child{border-bottom:0}
 .source{height:38px;border-radius:8px;background:#eef4f9;display:grid;place-items:center;font-weight:850;font-size:11px}
-.mention strong{display:block;font:700 15px/1.18 Georgia,serif;margin-bottom:4px}
+.mention strong{display:block;font:700 15px/1.18 Inter,sans-serif;margin-bottom:4px}
 .mention span,.mention time{font-size:10px;color:var(--muted)}
 
 /* Lower modules */
@@ -575,16 +575,32 @@ lor:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 
 
 .es-body{max-width:1180px;margin:0 auto;padding:44px 64px 64px}
-.sankey-wrap{border:1px solid var(--line);border-radius:12px;padding:28px;background:#fff;margin-bottom:44px;overflow-x:auto}
-.sankey-wrap h2{font-size:19px;color:var(--navy);margin:0 0 4px}
-.sankey-wrap .sub{color:var(--muted);font-size:13px;margin:0 0 22px}
-.sankey-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px;font-size:11.5px;color:var(--muted)}
-.sankey-legend span{display:inline-flex;align-items:center;gap:6px}
-.sankey-legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.sankey-wrap{border:1px solid var(--line);border-radius:12px;padding:28px;background:#fff;margin-bottom:44px;display:flex;flex-direction:column;overflow:hidden}
+.sankey-wrap h2{font-size:26px;font-weight:800;letter-spacing:-.01em;color:var(--navy);margin:0 0 6px}
+.sankey-wrap .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+
+#fmSankey{width:100%;display:block;flex:1 1 auto;min-height:0}
+@media(max-width:900px){#fmSankey{min-height:420px}}
+.fm-ribbon{cursor:pointer;transition:fill-opacity .18s}
+.fm-node-rect{cursor:pointer;transition:filter .15s}
+.fm-node-rect:hover{filter:brightness(1.12)}
+.fm-node-label{font-size:12.5px;font-weight:700;fill:var(--ink);pointer-events:none}
+.fm-node-value{font-size:11px;fill:var(--muted);pointer-events:none}
+.fm-tooltip{
+  position:fixed;z-index:60;pointer-events:none;
+  background:var(--navy);color:#dce9f6;padding:10px 13px;border-radius:8px;
+  font-size:13px;line-height:1.5;box-shadow:0 12px 28px rgba(3,35,66,.28);
+  opacity:0;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease;
+  max-width:240px;
+}
+.fm-tooltip.show{opacity:1;transform:translateY(0)}
+.fm-tooltip .tt-title{font-weight:800;font-size:14px;color:#fff;margin-bottom:3px}
+.fm-tooltip .tt-row{display:flex;justify-content:space-between;gap:14px;color:#b9cbe2}
+.fm-tooltip .tt-row b{color:#fff;font-weight:800}
 
 .signal-box{border:1px solid var(--line);border-radius:12px;padding:28px;background:#fff;margin-bottom:44px}
-.signal-box h2{font-size:19px;color:var(--navy);margin:0 0 4px}
-.signal-box .sub{color:var(--muted);font-size:13px;margin:0 0 22px;line-height:1.6;max-width:760px}
+.signal-box h2{font-size:26px;font-weight:800;letter-spacing:-.01em;color:var(--navy);margin:0 0 6px}
+.signal-box .sub{color:var(--muted);font-size:14px;margin:0 0 22px;line-height:1.6;max-width:760px}
 .vocab-list{display:flex;flex-direction:column;gap:0}
 .vocab-item{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:14px 0;border-top:1px solid var(--line)}
 .vocab-item:first-child{border-top:none}
@@ -602,6 +618,98 @@ lor:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 
 .es-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:900px){.es-grid{grid-template-columns:1fr}}
+
+/* ===== Odd Couples module (Emerging Signals page) ===== */
+.nc-wrap{margin-bottom:44px}
+.nc-body-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:0;align-items:start;border-top:1px solid var(--line);padding-top:24px}
+.nc-chart-col{padding-right:28px}
+.nc-detail-col{padding-left:28px;padding-right:6px;border-left:1px solid var(--line)}
+.nc-detail-col::-webkit-scrollbar{width:6px}
+.nc-detail-col::-webkit-scrollbar-thumb{background:#d3dde6;border-radius:999px}
+.nc-detail-col::-webkit-scrollbar-track{background:transparent}
+@media(max-width:900px){
+  .nc-body-grid{grid-template-columns:1fr}
+  .nc-chart-col{padding-right:0}
+  .nc-detail-col{padding-left:0;border-left:0;border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
+}
+
+.nc-controls{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:18px 0 22px}
+.nc-control-group{
+  display:flex;align-items:center;gap:9px;
+  background:#f7f9fb;border:1px solid var(--line);border-radius:9px;
+  padding:9px 13px;
+}
+.nc-control-group .filter-label{padding-top:0;white-space:nowrap;font-size:12px}
+.nc-refresh{border:1px solid var(--line);border-radius:999px;padding:8px 16px;background:#fff;font-size:13px;font-weight:700;color:var(--navy);cursor:pointer}
+.nc-refresh:hover{border-color:var(--blue);color:var(--blue)}
+.nc-status{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);margin-left:auto}
+.nc-dot{width:7px;height:7px;border-radius:50%;background:#2e9e5b;box-shadow:0 0 0 3px rgba(46,158,91,.15)}
+
+.nc-legend-row{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap}
+.nc-legend-caption{font-size:12.5px;font-weight:800;letter-spacing:.03em;color:var(--muted);text-transform:uppercase}
+.nc-grad-bar{width:100px;height:9px;border-radius:5px;background:linear-gradient(90deg,rgba(3,35,66,.16),rgba(3,35,66,.92))}
+.nc-grad-caption{font-size:12.5px;color:var(--muted)}
+.nc-measure-note{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0 0 16px;max-width:none}
+.nc-measure-note b{color:var(--navy);font-weight:800}
+
+#ncScatter{width:100%;height:580px;display:block}
+.nc-quad-label{font-size:12px;font-weight:800;letter-spacing:.03em;pointer-events:none}
+.nc-quad-label.n1{fill:var(--navy);opacity:.55}
+.nc-quad-label.n2{font-weight:600;opacity:.5;font-size:11px}
+.nc-axis-label{font-size:13px;fill:var(--muted);font-weight:700}
+.nc-axis-tick{font-size:12.5px;fill:var(--muted)}
+.nc-bubble{cursor:pointer;transition:opacity .15s}
+.nc-bubble:hover{opacity:.8}
+.nc-bubble.selected{stroke:#fff;stroke-width:3}
+.nc-bubble-label{font-size:13px;font-weight:800;fill:var(--navy);pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+
+.nc-tooltip{position:fixed;z-index:60;pointer-events:none;background:var(--navy);color:#dce9f6;padding:11px 14px;border-radius:8px;font-size:13.5px;line-height:1.55;box-shadow:0 12px 28px rgba(3,35,66,.28);opacity:0;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease;max-width:250px}
+.nc-tooltip.show{opacity:1;transform:translateY(0)}
+.nc-tooltip .tt-title{font-weight:800;font-size:14.5px;color:#fff;margin-bottom:5px}
+.nc-tooltip .tt-row{display:flex;justify-content:space-between;gap:14px;color:#b9cbe2}
+.nc-tooltip .tt-row b{color:#fff;font-weight:800}
+.nc-tooltip .tt-sources{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}
+.nc-tooltip .tt-chip{font-size:10.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.14);color:#e3ecf7}
+
+.nc-lede{font-size:14px;color:#506680;margin:7px 0 18px;line-height:1.6}
+.nc-detail-name{font:700 20px/1.25 Inter,sans-serif;color:var(--navy);margin:7px 0 2px}
+
+.nc-metrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:18px}
+.nc-metric{padding:14px 10px 13px 0}
+.nc-metric:not(:last-child){border-right:1px solid var(--line);padding-right:12px}
+.nc-metric+.nc-metric{padding-left:12px}
+.nc-metric-label{text-transform:uppercase;letter-spacing:.03em;font-size:10.5px;font-weight:800;color:var(--muted)}
+.nc-metric-value{font-size:21px;font-weight:800;color:var(--navy);margin-top:4px;letter-spacing:-.01em}
+.nc-metric-note{font-size:11px;color:#7f8da0;margin-top:3px}
+
+.nc-section-label{font-size:12px;text-transform:uppercase;letter-spacing:.04em;font-weight:800;color:var(--muted);margin-bottom:10px}
+.nc-source-block{margin-bottom:18px}
+.nc-source-row{display:grid;grid-template-columns:76px 1fr 50px;align-items:center;gap:10px;margin:10px 0;font-size:13px;transition:opacity .2s}
+.nc-source-row.inactive{opacity:.35}
+.nc-source-name{font-weight:700;color:var(--ink)}
+.nc-bar-track{height:7px;background:#e8eef4;border-radius:999px;overflow:hidden}
+.nc-bar-fill{height:100%;border-radius:999px}
+.nc-source-value{text-align:right;font-weight:800;color:var(--navy);font-size:13px}
+
+.nc-signals-block{border-top:1px solid var(--line);padding-top:14px;margin-bottom:18px}
+.nc-signal-item{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.nc-signal-item:last-child{border-bottom:0}
+.nc-signal-dot{flex:0 0 7px;width:7px;height:7px;border-radius:50%;margin-top:6px}
+.nc-signal-body{flex:1;min-width:0}
+.nc-signal-title{display:block;font:700 14px/1.35 Inter,sans-serif;color:var(--navy);text-decoration:none}
+.nc-signal-title:hover{color:var(--blue);text-decoration:underline}
+.nc-signal-meta{font-size:11.5px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.02em}
+.nc-signal-heat-track{width:100%;max-width:160px;height:4px;background:#e8eef4;border-radius:999px;overflow:hidden;margin-top:7px}
+.nc-signal-heat-fill{height:100%;border-radius:999px}
+
+
+@media(max-width:640px){
+  .nc-metrics{grid-template-columns:1fr}
+  .nc-metric{border-right:0!important;border-bottom:1px solid var(--line);padding:12px 0!important}
+  .nc-metric:last-child{border-bottom:0}
+  #ncScatter{height:440px}
+  .nc-status{margin-left:0;width:100%}
+}
 
 /* ===== events page-specific styles ===== */
 navy);letter-spacing:.01em;margin:0 0 18px}
@@ -1392,7 +1500,7 @@ or:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 
   <div class="es-dashboard">
 
-  <div class="signal-box">
+  <div class="signal-box" id="vocabBox">
     <h2>New Vocabulary</h2>
     <p class="sub">Words are a strong indicator of behavioral and cultural change, often making the journey from niche to mainstream use. Every generation applies its own meanings to words&mdash;some persist, others are discarded quickly. Indicators of change include new words being adopted, existing words shifting meaning, and words combining to describe increasingly complex processes. Current language indicators include:</p>
     <div class="vocab-list">
@@ -1417,68 +1525,98 @@ or:var(--navy);letter-spacing:.01em;margin:0 0 18px}
 
   <div class="sankey-wrap">
     <h2>Follow the Money</h2>
-    <p class="sub">Estimated private and public investment by source, across five emerging-technology domains ($B, illustrative).</p>
-    <svg viewBox="0 0 900 340" width="100%" height="340" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
-<defs>
-<linearGradient id="grad-VentureCapital" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#49d9ef" stop-opacity="0.55"/><stop offset="1" stop-color="#49d9ef" stop-opacity="0.22"/></linearGradient>
-<linearGradient id="grad-CorporateInvestment" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2678d9" stop-opacity="0.55"/><stop offset="1" stop-color="#2678d9" stop-opacity="0.22"/></linearGradient>
-<linearGradient id="grad-GovernmentGrants" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9E0B33" stop-opacity="0.55"/><stop offset="1" stop-color="#9E0B33" stop-opacity="0.22"/></linearGradient>
-<linearGradient id="grad-SovereignWealth" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b48a3b" stop-opacity="0.55"/><stop offset="1" stop-color="#b48a3b" stop-opacity="0.22"/></linearGradient>
-</defs>
-<path d="M186,14 C460.0,14 460.0,14 734,14 L734,81.2 C460.0,81.2 460.0,83.12 186,83.12 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; AI: $24B</title></path>
-<path d="M186,83.12 C460.0,83.12 460.0,150.8 734,150.8 L734,178.8 C460.0,178.8 460.0,111.92 186,111.92 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Biotech: $10B</title></path>
-<path d="M186,111.92 C460.0,111.92 460.0,276.0 734,276.0 L734,284.4 C460.0,284.4 460.0,120.56 186,120.56 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Quantum: $3B</title></path>
-<path d="M186,120.56 C460.0,120.56 460.0,226.0 734,226.0 L734,237.2 C460.0,237.2 460.0,132.08 186,132.08 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Semiconductors: $4B</title></path>
-<path d="M186,132.07999999999998 C460.0,132.07999999999998 460.0,309.2 734,309.2 L734,312.0 C460.0,312.0 460.0,134.95999999999998 186,134.95999999999998 Z" fill="url(#grad-VentureCapital)" stroke="none"><title>Venture Capital -&gt; Space: $1B</title></path>
-<path d="M186,142.95999999999998 C460.0,142.95999999999998 460.0,81.2 734,81.2 L734,114.80000000000001 C460.0,114.80000000000001 460.0,177.51999999999998 186,177.51999999999998 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; AI: $12B</title></path>
-<path d="M186,177.51999999999998 C460.0,177.51999999999998 460.0,237.2 734,237.2 L734,259.59999999999997 C460.0,259.59999999999997 460.0,200.55999999999997 186,200.55999999999997 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Semiconductors: $8B</title></path>
-<path d="M186,200.55999999999997 C460.0,200.55999999999997 460.0,178.8 734,178.8 L734,190.0 C460.0,190.0 460.0,212.07999999999998 186,212.07999999999998 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Biotech: $4B</title></path>
-<path d="M186,212.07999999999998 C460.0,212.07999999999998 460.0,312.0 734,312.0 L734,317.6 C460.0,317.6 460.0,217.83999999999997 186,217.83999999999997 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Space: $2B</title></path>
-<path d="M186,217.83999999999997 C460.0,217.83999999999997 460.0,284.4 734,284.4 L734,290.0 C460.0,290.0 460.0,223.59999999999997 186,223.59999999999997 Z" fill="url(#grad-CorporateInvestment)" stroke="none"><title>Corporate Investment -&gt; Quantum: $2B</title></path>
-<path d="M186,231.6 C460.0,231.6 460.0,290.0 734,290.0 L734,298.4 C460.0,298.4 460.0,240.24 186,240.24 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Quantum: $3B</title></path>
-<path d="M186,240.24 C460.0,240.24 460.0,259.6 734,259.6 L734,268.0 C460.0,268.0 460.0,248.88 186,248.88 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Semiconductors: $3B</title></path>
-<path d="M186,248.88 C460.0,248.88 460.0,317.59999999999997 734,317.59999999999997 L734,325.99999999999994 C460.0,325.99999999999994 460.0,257.52 186,257.52 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Space: $3B</title></path>
-<path d="M186,257.52 C460.0,257.52 460.0,114.80000000000001 734,114.80000000000001 L734,126.00000000000001 C460.0,126.00000000000001 460.0,269.03999999999996 186,269.03999999999996 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; AI: $4B</title></path>
-<path d="M186,269.03999999999996 C460.0,269.03999999999996 460.0,190.0 734,190.0 L734,206.8 C460.0,206.8 460.0,286.31999999999994 186,286.31999999999994 Z" fill="url(#grad-GovernmentGrants)" stroke="none"><title>Government Grants -&gt; Biotech: $6B</title></path>
-<path d="M186,294.32 C460.0,294.32 460.0,126.00000000000001 734,126.00000000000001 L734,142.8 C460.0,142.8 460.0,311.6 186,311.6 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; AI: $6B</title></path>
-<path d="M186,311.6 C460.0,311.6 460.0,206.8 734,206.8 L734,218.0 C460.0,218.0 460.0,323.12 186,323.12 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; Biotech: $4B</title></path>
-<path d="M186,323.12 C460.0,323.12 460.0,298.4 734,298.4 L734,301.2 C460.0,301.2 460.0,326.0 186,326.0 Z" fill="url(#grad-SovereignWealth)" stroke="none"><title>Sovereign Wealth -&gt; Quantum: $1B</title></path>
-<rect x="170" y="14.0" width="16" height="121.0" rx="3" fill="#49d9ef"/>
-<text x="156" y="74.5" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Venture Capital</text>
-<text x="156" y="88.5" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$42B</text>
-<rect x="170" y="143.0" width="16" height="80.6" rx="3" fill="#2678d9"/>
-<text x="156" y="183.3" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Corporate Investment</text>
-<text x="156" y="197.3" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$28B</text>
-<rect x="170" y="231.6" width="16" height="54.7" rx="3" fill="#9E0B33"/>
-<text x="156" y="259.0" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Government Grants</text>
-<text x="156" y="273.0" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$19B</text>
-<rect x="170" y="294.3" width="16" height="31.7" rx="3" fill="#b48a3b"/>
-<text x="156" y="310.2" text-anchor="end" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Sovereign Wealth</text>
-<text x="156" y="324.2" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#60738d">$11B</text>
-<rect x="734" y="14.0" width="16" height="128.8" rx="3" fill="#032342"/>
-<text x="764" y="78.4" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">AI</text>
-<text x="764" y="92.4" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$46B</text>
-<rect x="734" y="150.8" width="16" height="67.2" rx="3" fill="#032342"/>
-<text x="764" y="184.4" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Biotech</text>
-<text x="764" y="198.4" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$24B</text>
-<rect x="734" y="226.0" width="16" height="42.0" rx="3" fill="#032342"/>
-<text x="764" y="247.0" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Semiconductors</text>
-<text x="764" y="261.0" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$15B</text>
-<rect x="734" y="276.0" width="16" height="25.2" rx="3" fill="#032342"/>
-<text x="764" y="288.6" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Quantum</text>
-<text x="764" y="302.6" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$9B</text>
-<rect x="734" y="309.2" width="16" height="16.8" rx="3" fill="#032342"/>
-<text x="764" y="317.6" text-anchor="start" dominant-baseline="middle" font-size="12.5" font-weight="700" fill="#102d50">Space</text>
-<text x="764" y="331.6" text-anchor="start" dominant-baseline="middle" font-size="11" fill="#60738d">$6B</text>
-</svg>
-    <div class="sankey-legend">
-      <span><i style="background:#A8CBF0"></i>Venture Capital</span>
-      <span><i style="background:#2678d9"></i>Corporate Investment</span>
-      <span><i style="background:#9E0B33"></i>Government Grants</span>
-      <span><i style="background:#b48a3b"></i>Sovereign Wealth</span>
-    </div>
+    <p class="sub">Estimated private and public investment by source, across five emerging-technology domains ($B, illustrative). Hover a flow or a bar for detail.</p>
+    <svg id="fmSankey" width="100%" height="480" role="img" aria-label="Sankey diagram of investment flows by source into technology domains"></svg>
+    <div class="fm-tooltip" id="fmTooltip"></div>
   </div>
 
+  </div>
+
+  <div class="signal-box nc-wrap">
+    <h2>Odd Couples</h2>
+    <p class="sub">Which technologies are increasingly appearing together&mdash;and how quickly are those combinations gaining traction? This view measures the frequency and growth of technology pairings across research publications, patents, and news coverage to identify emerging areas of convergence.</p>
+
+    <div class="nc-controls">
+      <div class="nc-control-group">
+        <span class="filter-label">Sources</span>
+        <button class="chip active" data-source="research" id="ncSrcResearch">Research</button>
+        <button class="chip active" data-source="patents" id="ncSrcPatents">Patents</button>
+        <button class="chip active" data-source="news" id="ncSrcNews">News</button>
+      </div>
+      <div class="nc-control-group">
+        <span class="filter-label">Min. frequency</span>
+        <select id="ncMinfreq">
+          <option value="0">All combinations</option>
+          <option value="200">200+</option>
+          <option value="500">500+</option>
+          <option value="1000">1,000+</option>
+        </select>
+      </div>
+      <button class="nc-refresh" id="ncRefresh">&#8635; Refresh data</button>
+      <div class="nc-status"><span class="nc-dot"></span><span id="ncStatusText">Demo data &middot; ready for live feed</span></div>
+    </div>
+
+    <div class="nc-body-grid">
+      <div class="nc-chart-col">
+        <div class="nc-legend-row">
+          <span class="nc-legend-caption">Growth intensity</span>
+          <div class="nc-grad-bar"></div>
+          <span class="nc-grad-caption">slower &rarr; faster</span>
+        </div>
+        <p class="nc-measure-note">Each dot plots frequency (horizontal position) against growth (vertical position and opacity), comparing the past year to the year before it for the sources selected above. Dashed lines split the chart into four quadrants at the median of what's currently shown: <b>Emerging</b> (lower frequency, above-median growth), <b>Accelerating</b> (higher frequency, above-median growth), <b>Early Signal</b> (lower frequency, below-median growth), and <b>Maturing</b> (higher frequency, below-median growth).</p>
+
+        <svg id="ncScatter" role="img" aria-label="Scatter plot of technology combinations by frequency and growth"></svg>
+        <div class="nc-tooltip" id="ncTooltip"></div>
+      </div>
+
+      <aside class="nc-detail-col" id="ncDetail">
+        <div class="kicker">Selected signal</div>
+        <div class="nc-detail-name" id="ncDetailTitle">AI &times; Robotics</div>
+        <p class="nc-lede" id="ncDetailLede">A rapidly strengthening combination appearing across research, patents, and news.</p>
+
+        <div class="nc-metrics">
+          <div class="nc-metric">
+            <div class="nc-metric-label">Frequency</div>
+            <div class="nc-metric-value" id="ncMetricFrequency">1,240</div>
+            <div class="nc-metric-note">recent co-occurrences</div>
+          </div>
+          <div class="nc-metric">
+            <div class="nc-metric-label">Growth</div>
+            <div class="nc-metric-value" id="ncMetricGrowth">+218%</div>
+            <div class="nc-metric-note" id="ncWindowNote">Past year vs. year before</div>
+          </div>
+          <div class="nc-metric">
+            <div class="nc-metric-label">First detected</div>
+            <div class="nc-metric-value" id="ncMetricFirstDetected">2022</div>
+            <div class="nc-metric-note">first observed</div>
+          </div>
+        </div>
+
+        <div class="nc-source-block">
+          <div class="nc-section-label">Where the signal is appearing</div>
+          <div class="nc-source-row" id="ncResearchRow">
+            <div class="nc-source-name">Research</div>
+            <div class="nc-bar-track"><div class="nc-bar-fill" id="ncResearchBar" style="background:var(--blue);width:70%"></div></div>
+            <div class="nc-source-value" id="ncResearchValue">+176%</div>
+          </div>
+          <div class="nc-source-row" id="ncPatentsRow">
+            <div class="nc-source-name">Patents</div>
+            <div class="nc-bar-track"><div class="nc-bar-fill" id="ncPatentsBar" style="background:var(--gold);width:88%"></div></div>
+            <div class="nc-source-value" id="ncPatentsValue">+243%</div>
+          </div>
+          <div class="nc-source-row" id="ncNewsRow">
+            <div class="nc-source-name">News</div>
+            <div class="nc-bar-track"><div class="nc-bar-fill" id="ncNewsBar" style="background:var(--maroon);width:100%"></div></div>
+            <div class="nc-source-value" id="ncNewsValue">+312%</div>
+          </div>
+        </div>
+
+        <div class="nc-signals-block">
+          <div class="nc-section-label">Sources driving the signal</div>
+          <div id="ncSignalList"></div>
+        </div>
+      </aside>
+    </div>
   </div>
 
   <div class="es-split">
@@ -1771,6 +1909,721 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('.issue-section').forEach(section => issueObserver.observe(section));
 }
 
+/* ---- Odd Couples module (Emerging Signals page) ---- */
+const NC_DATA = [
+  {
+    id:"ai-robotics", name:"AI × Robotics", firstDetected:2022,
+    sources:["research","patents","news"],
+    trend:{
+      years:[2019,2020,2021,2022,2023,2024,2025],
+      research:[270,360,470,560,740,910,1120],
+      patents:[170,210,250,290,330,365,410],
+      news:[210,270,310,390,470,610,780]
+    },
+    lede:"A rapidly strengthening combination appearing across research, patents, and news.",
+    note:"The combination is becoming more visible across multiple independent source types—not just in the news cycle.",
+    topItems:[
+      {type:"research", title:"Foundation models for closed-loop robotic manipulation", outlet:"Nature Robotics", date:2025, score:96},
+      {type:"patents", title:"Vision-language control policy for warehouse manipulators", outlet:"USPTO", date:2025, score:91},
+      {type:"news", title:"Humanoid robot makers race to ship AI-native platforms", outlet:"The Information", date:2025, score:89},
+      {type:"research", title:"Sim-to-real transfer for dexterous grasping via LLM planners", outlet:"MIT CSAIL", date:2025, score:84},
+      {type:"patents", title:"Multimodal perception stack for autonomous mobile robots", outlet:"USPTO", date:2024, score:78}
+    ]
+  },
+  {
+    id:"ai-synthetic-biology", name:"AI × Synthetic Biology", firstDetected:2021,
+    sources:["research","patents","news"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[110,150,190,260,330,440,590],patents:[80,90,120,150,190,245,310],news:[70,100,130,180,250,360,520]},
+    lede:"AI is increasingly appearing alongside biological design, discovery, and automation.",
+    note:"A convergence signal becomes more interesting when it appears in scientific work and invention—not only in media coverage.",
+    topItems:[
+      {type:"research", title:"Generative protein design accelerates enzyme discovery", outlet:"Nature", date:2025, score:95},
+      {type:"news", title:"AI-designed proteins move from lab to clinical trials", outlet:"STAT News", date:2025, score:90},
+      {type:"patents", title:"Machine-learning-guided DNA synthesis pipeline", outlet:"USPTO", date:2025, score:87},
+      {type:"research", title:"Foundation models for genome-scale metabolic engineering", outlet:"Science", date:2024, score:82},
+      {type:"news", title:"Synthetic biology startups raise record funding on AI tools", outlet:"Bloomberg", date:2025, score:76}
+    ]
+  },
+  {
+    id:"quantum-sensors", name:"Quantum × Sensors", firstDetected:2020,
+    sources:["research","patents"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[90,120,145,175,230,285,350],patents:[60,75,90,115,145,180,230],news:[30,35,45,55,70,85,105]},
+    lede:"Quantum technologies are increasingly converging with sensing and measurement systems.",
+    note:"The research and patent signal is stronger than the news signal—a potentially useful example of development preceding broad attention.",
+    topItems:[
+      {type:"research", title:"Quantum-enhanced magnetometry for subsurface sensing", outlet:"Physical Review Applied", date:2025, score:88},
+      {type:"patents", title:"NV-diamond sensor array with onboard error correction", outlet:"USPTO", date:2025, score:83},
+      {type:"research", title:"Entangled photon sensing for gravitational surveying", outlet:"Nature Physics", date:2024, score:79},
+      {type:"patents", title:"Cold-atom interferometer packaging for field deployment", outlet:"USPTO", date:2024, score:74},
+      {type:"research", title:"Noise-resilient quantum sensor calibration methods", outlet:"arXiv", date:2025, score:70}
+    ]
+  },
+  {
+    id:"space-ai", name:"Space × AI", firstDetected:2021,
+    sources:["research","patents","news"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[80,100,125,165,220,285,350],patents:[55,70,95,120,155,190,235],news:[95,120,155,220,310,410,560]},
+    lede:"AI is moving deeper into satellite operations, remote sensing, navigation, and space systems.",
+    note:"A useful signal to monitor is whether AI becomes an enabling layer across multiple space capabilities rather than a discrete application.",
+    topItems:[
+      {type:"news", title:"AI-driven satellite constellations promise real-time earth monitoring", outlet:"SpaceNews", date:2025, score:93},
+      {type:"research", title:"Onboard AI for autonomous satellite collision avoidance", outlet:"AIAA Journal", date:2025, score:88},
+      {type:"patents", title:"Edge-AI processing module for small-satellite payloads", outlet:"USPTO", date:2025, score:85},
+      {type:"news", title:"Space agencies pilot AI copilots for mission operations", outlet:"Reuters", date:2024, score:80},
+      {type:"research", title:"Foundation models for multispectral remote sensing", outlet:"Remote Sensing of Environment", date:2024, score:75}
+    ]
+  },
+  {
+    id:"edge-ai", name:"Edge Computing × AI", firstDetected:2020,
+    sources:["research","patents","news"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[230,310,380,470,570,690,810],patents:[220,290,350,420,500,600,690],news:[180,240,310,390,470,570,660]},
+    lede:"AI and edge computing are increasingly treated as a combined architecture for real-time systems.",
+    note:"High frequency with slower growth can indicate a relationship that is moving from emerging to established.",
+    topItems:[
+      {type:"patents", title:"On-device inference accelerator for industrial edge nodes", outlet:"USPTO", date:2025, score:90},
+      {type:"research", title:"Efficient transformer inference at the network edge", outlet:"MLSys", date:2025, score:86},
+      {type:"news", title:"Chipmakers double down on edge AI silicon roadmaps", outlet:"The Register", date:2025, score:82},
+      {type:"patents", title:"Federated learning scheduler for distributed edge devices", outlet:"USPTO", date:2024, score:77},
+      {type:"research", title:"Latency-aware model partitioning for edge-cloud pipelines", outlet:"arXiv", date:2024, score:71}
+    ]
+  },
+  {
+    id:"biotech-ai", name:"Biotech × AI", firstDetected:2022,
+    sources:["research","patents","news"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[120,150,190,250,330,430,560],patents:[100,115,145,180,220,275,340],news:[110,130,165,220,300,390,500]},
+    lede:"AI is becoming increasingly embedded in biological discovery, prediction, and engineering.",
+    note:"The combination spans multiple sectors, making its growth more consequential than a niche technology pairing.",
+    topItems:[
+      {type:"research", title:"Foundation model predicts cell response to novel compounds", outlet:"Cell", date:2025, score:94},
+      {type:"news", title:"AI-designed drug candidate enters phase 1 trials", outlet:"Endpoints News", date:2025, score:89},
+      {type:"patents", title:"Machine-learning pipeline for antibody optimization", outlet:"USPTO", date:2025, score:85},
+      {type:"research", title:"Multi-omic foundation models for disease subtyping", outlet:"Nature Medicine", date:2024, score:80},
+      {type:"news", title:"Biotech AI partnerships surge across major pharma", outlet:"Fierce Biotech", date:2025, score:75}
+    ]
+  },
+  {
+    id:"robotics-iot", name:"Robotics × IoT", firstDetected:2021,
+    sources:["research","patents","news"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[130,160,195,235,280,325,370],patents:[100,125,150,180,220,265,315],news:[90,115,145,180,230,285,340]},
+    lede:"Connected sensors and robotics are increasingly treated as one operational system.",
+    note:"This is a useful comparison point: a high-frequency combination whose growth is beginning to flatten.",
+    topItems:[
+      {type:"patents", title:"Sensor fusion framework for fleets of mobile robots", outlet:"USPTO", date:2025, score:84},
+      {type:"research", title:"Distributed IoT coordination for warehouse robotics", outlet:"IEEE RA-L", date:2024, score:79},
+      {type:"news", title:"Logistics operators expand connected robot fleets", outlet:"Supply Chain Dive", date:2025, score:76},
+      {type:"patents", title:"Low-power IoT beacon protocol for robot localization", outlet:"USPTO", date:2024, score:71},
+      {type:"research", title:"Edge-connected swarm robotics for inventory tracking", outlet:"arXiv", date:2024, score:68}
+    ]
+  },
+  {
+    id:"materials-ai", name:"Advanced Materials × AI", firstDetected:2019,
+    sources:["research","patents","news"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[55,70,90,125,170,240,330],patents:[45,60,80,110,155,210,285],news:[35,45,60,90,125,180,245]},
+    lede:"AI-enabled materials discovery is creating a bridge between computation and physical engineering.",
+    note:"Low frequency paired with strong multi-source growth is the type of pattern the TFL page can flag as worth watching.",
+    topItems:[
+      {type:"research", title:"Generative models discover novel battery electrolytes", outlet:"Nature Materials", date:2025, score:92},
+      {type:"patents", title:"ML-guided alloy composition screening method", outlet:"USPTO", date:2025, score:87},
+      {type:"news", title:"AI-discovered superconductor candidate stirs debate", outlet:"Ars Technica", date:2025, score:83},
+      {type:"research", title:"Foundation models for crystal structure prediction", outlet:"Science Advances", date:2024, score:78},
+      {type:"patents", title:"Autonomous lab platform for materials synthesis", outlet:"USPTO", date:2024, score:74}
+    ]
+  },
+  {
+    id:"cloud-energy", name:"Cloud Computing × Energy", firstDetected:2020,
+    sources:["research","patents","news"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[65,80,100,125,150,175,205],patents:[40,55,70,90,115,145,175],news:[50,65,90,120,165,210,250]},
+    lede:"Computing infrastructure and energy systems are increasingly discussed as interdependent.",
+    note:"This illustrates how a technology combination can be strategically important even when its growth rate is not the highest on the chart.",
+    topItems:[
+      {type:"news", title:"Hyperscalers sign gigawatt-scale power deals for AI data centers", outlet:"WSJ", date:2025, score:91},
+      {type:"research", title:"Load-aware scheduling for carbon-optimized cloud compute", outlet:"ACM e-Energy", date:2025, score:83},
+      {type:"patents", title:"Dynamic power allocation system for distributed data centers", outlet:"USPTO", date:2024, score:78},
+      {type:"news", title:"Utilities warn of strain from cloud AI power demand", outlet:"Reuters", date:2025, score:74},
+      {type:"research", title:"Grid-interactive cooling strategies for hyperscale facilities", outlet:"Applied Energy", date:2024, score:69}
+    ]
+  },
+  {
+    id:"hydrogen-storage", name:"Hydrogen × Energy Storage", firstDetected:2019,
+    sources:["research","patents","news"],
+    trend:{years:[2019,2020,2021,2022,2023,2024,2025],research:[70,85,100,125,150,180,220],patents:[60,75,90,110,135,170,205],news:[80,95,115,145,180,235,290]},
+    lede:"Hydrogen and storage technologies are increasingly discussed as complementary pieces of flexible energy systems.",
+    note:"This combination is useful for comparing technology convergence with infrastructure and market narratives.",
+    topItems:[
+      {type:"research", title:"Metal-hydride materials for high-density hydrogen storage", outlet:"Joule", date:2025, score:87},
+      {type:"patents", title:"Modular electrolyzer-storage integration system", outlet:"USPTO", date:2025, score:82},
+      {type:"news", title:"Green hydrogen storage projects gain policy momentum", outlet:"Reuters", date:2024, score:77},
+      {type:"research", title:"Techno-economic analysis of underground hydrogen storage", outlet:"Energy & Environmental Science", date:2024, score:72},
+      {type:"patents", title:"Compact hydrogen storage tank for distributed energy systems", outlet:"USPTO", date:2023, score:66}
+    ]
+  }
+];
+
+let ncData = NC_DATA;
+let ncSelectedId = "ai-robotics";
+let ncActiveSources = new Set(["research","patents","news"]);
+let ncInitialized = false;
+
+const ncFmt = d3.format(",");
+const ncPct = d => (d >= 0 ? "+" : "") + d + "%";
+
+function ncLastPrevIdx(years){
+  return {last: years.length-1, prev: years.length-2};
+}
+function ncSourceMetric(d, s){
+  const arr = (d.trend && d.trend[s]) || [];
+  const {last,prev} = ncLastPrevIdx(d.trend.years);
+  const vLast = arr[last] ?? 0, vPrev = arr[prev] ?? 0;
+  const growth = vPrev>0 ? Math.round(((vLast-vPrev)/vPrev)*100) : (vLast>0 ? 100 : 0);
+  return {frequency:vLast, growth};
+}
+function ncCombinedMetric(d, sources){
+  const {last,prev} = ncLastPrevIdx(d.trend.years);
+  let vLast=0, vPrev=0;
+  sources.forEach(s=>{
+    const arr = (d.trend && d.trend[s]) || [];
+    vLast += arr[last] ?? 0;
+    vPrev += arr[prev] ?? 0;
+  });
+  const growth = vPrev>0 ? Math.round(((vLast-vPrev)/vPrev)*100) : (vLast>0 ? 100 : 0);
+  return {frequency:vLast, growth};
+}
+function ncFilteredData(){
+  const min = +document.getElementById("ncMinfreq").value;
+  return ncData.map(d=>{
+    const srcs = d.sources.filter(s=>ncActiveSources.has(s));
+    const m = ncCombinedMetric(d, srcs);
+    return Object.assign({}, d, {frequency:m.frequency, growth:m.growth, _activeSources:srcs});
+  }).filter(d => d._activeSources.length>0 && d.frequency >= min);
+}
+
+const ncGrowthColor = "#032342"; // var(--navy); intensity is conveyed by fill-opacity, not hue
+
+function ncRenderScatter(){
+  const svg = d3.select("#ncScatter");
+  const node = svg.node();
+  const width = node.clientWidth || 900;
+  const height = node.clientHeight || 540;
+  const margin = {top:26,right:26,bottom:56,left:64};
+  const innerW = Math.max(10,width-margin.left-margin.right);
+  const innerH = Math.max(10,height-margin.top-margin.bottom);
+
+  const items = ncFilteredData();
+  const T = d3.transition().duration(650).ease(d3.easeCubicOut);
+
+  const freqDomainMax = d3.max(items,d=>d.frequency)*1.1 || 1;
+  const growthDomainMax = d3.max(items,d=>d.growth)*1.15 || 1;
+  const growthDomainMin = Math.min(0, d3.min(items,d=>d.growth)||0);
+
+  const x = d3.scaleSqrt().domain([0, freqDomainMax]).range([0,innerW]);
+  const y = d3.scaleLinear().domain([growthDomainMin, growthDomainMax]).range([innerH,0]).nice();
+  const gMin = d3.min(items,d=>d.growth)||0, gMax = d3.max(items,d=>d.growth)||1;
+  const ncOpacity = d3.scaleLinear().domain([gMin, gMax > gMin ? gMax : gMin+1]).range([0.28,0.95]).clamp(true);
+  const NC_BUBBLE_R = 13;
+
+  const medFreq = d3.median(items,d=>d.frequency) ?? freqDomainMax/2;
+  const medGrowth = d3.median(items,d=>d.growth) ?? growthDomainMax/2;
+  const xMid = x(medFreq);
+  const yMid = y(medGrowth);
+
+  let g = svg.select("g.nc-plot-root");
+  if(g.empty()){
+    svg.selectAll("*").remove();
+    g = svg.append("g").attr("class","nc-plot-root");
+    g.append("g").attr("class","nc-layer-quad");
+    g.append("g").attr("class","nc-layer-grid-x");
+    g.append("g").attr("class","nc-layer-grid-y");
+    g.append("g").attr("class","nc-layer-quad-labels");
+    g.append("g").attr("class","nc-layer-axis-x");
+    g.append("g").attr("class","nc-layer-axis-y");
+    g.append("text").attr("class","nc-axis-label nc-x-axis-label").attr("text-anchor","middle")
+      .text("FREQUENCY OF CO-OCCURRENCE  →");
+    g.append("text").attr("class","nc-axis-label nc-y-axis-label").attr("transform","rotate(-90)")
+      .attr("text-anchor","middle").text("GROWTH IN CO-OCCURRENCE  →");
+    g.append("g").attr("class","nc-layer-points");
+  }
+  g.attr("transform",`translate(${margin.left},${margin.top})`);
+
+  const quads = [
+    {key:"emerging",  x:0,    y:0,    w:xMid,        h:yMid,        fill:"#fdf6ea", label:"EMERGING",     sub:"low freq · high growth"},
+    {key:"breakout",  x:xMid, y:0,    w:innerW-xMid, h:yMid,        fill:"#eaf3fc", label:"ACCELERATING", sub:"high freq · high growth"},
+    {key:"watch",     x:0,    y:yMid, w:xMid,        h:innerH-yMid, fill:"#f7f9fb", label:"EARLY SIGNAL", sub:"low freq · low growth"},
+    {key:"mature",    x:xMid, y:yMid, w:innerW-xMid, h:innerH-yMid, fill:"#eef1f5", label:"MATURING",     sub:"high freq · low growth"}
+  ];
+  g.select(".nc-layer-quad").selectAll("rect").data(quads,d=>d.key).join("rect")
+    .attr("x",d=>d.x).attr("y",d=>d.y).attr("width",d=>Math.max(0,d.w)).attr("height",d=>Math.max(0,d.h))
+    .attr("fill",d=>d.fill);
+
+  // Only draw a label if the quadrant is wide enough for it to read cleanly —
+  // avoids text spilling past the chart edge when the median split makes a quadrant narrow.
+  const qLabels = g.select(".nc-layer-quad-labels").selectAll("g").data(quads,d=>d.key).join("g")
+    .attr("transform",d=>`translate(${d.x+12},${d.y + (d.key==="emerging"||d.key==="breakout"?20:d.h-14)})`);
+  qLabels.selectAll("*").remove();
+  qLabels.filter(d=>d.w>115).append("text").attr("class","nc-quad-label n1").text(d=>d.label);
+  qLabels.filter(d=>d.w>190).append("text").attr("class","nc-quad-label n2").attr("y",15).text(d=>d.sub);
+
+  g.select(".nc-layer-grid-x").attr("transform",`translate(0,${innerH})`)
+    .call(d3.axisBottom(x).ticks(6).tickSize(-innerH).tickFormat(""))
+    .call(a=>a.selectAll("line").attr("stroke","#e9eef4"))
+    .call(a=>a.select(".domain").remove());
+  g.select(".nc-layer-grid-y")
+    .call(d3.axisLeft(y).ticks(6).tickSize(-innerW).tickFormat(""))
+    .call(a=>a.selectAll("line").attr("stroke","#e9eef4"))
+    .call(a=>a.select(".domain").remove());
+
+  const xAxis = d3.axisBottom(x).ticks(6).tickFormat(d3.format(".2s"));
+  const yAxis = d3.axisLeft(y).ticks(6).tickFormat(d=>d+"%");
+  g.select(".nc-layer-axis-x").attr("transform",`translate(0,${innerH})`).call(xAxis)
+    .call(a=>a.select(".domain").attr("stroke","#c7d3e0"))
+    .call(a=>a.selectAll("text").attr("class","nc-axis-tick"));
+  g.select(".nc-layer-axis-y").call(yAxis)
+    .call(a=>a.select(".domain").attr("stroke","#c7d3e0"))
+    .call(a=>a.selectAll("text").attr("class","nc-axis-tick"));
+
+  g.select(".nc-x-axis-label").attr("x",innerW/2).attr("y",innerH+46);
+  g.select(".nc-y-axis-label").attr("x",-innerH/2).attr("y",-46);
+
+  g.selectAll(".nc-median-line").remove();
+  g.insert("line",".nc-layer-points").attr("class","nc-median-line")
+    .attr("x1",xMid).attr("x2",xMid).attr("y1",0).attr("y2",innerH)
+    .attr("stroke","#c7d3e0").attr("stroke-dasharray","2 4");
+  g.insert("line",".nc-layer-points").attr("class","nc-median-line")
+    .attr("x1",0).attr("x2",innerW).attr("y1",yMid).attr("y2",yMid)
+    .attr("stroke","#c7d3e0").attr("stroke-dasharray","2 4");
+
+  const tooltip = d3.select("#ncTooltip");
+
+  const points = g.select(".nc-layer-points").selectAll(".nc-point")
+    .data(items, d=>d.id)
+    .join(
+      enter => enter.append("g").attr("class","nc-point")
+        .attr("transform",d=>`translate(${x(d.frequency)},${y(d.growth)})`)
+        .call(sel => sel.append("circle")
+          .attr("class",d=>`nc-bubble ${d.id===ncSelectedId?"selected":""}`)
+          .attr("r",0)
+          .attr("fill",ncGrowthColor)
+          .attr("fill-opacity",0)
+          .attr("stroke",d=>d.id===ncSelectedId?"#fff":"rgba(255,255,255,.85)")
+          .attr("stroke-width",d=>d.id===ncSelectedId?3:1.3))
+        .call(sel => sel.transition(T)
+          .attr("transform",d=>`translate(${x(d.frequency)},${y(d.growth)})`))
+        .call(sel => sel.select(".nc-bubble").transition(T).attr("r",NC_BUBBLE_R).attr("fill-opacity",d=>ncOpacity(d.growth))),
+      update => update
+        .call(sel => sel.transition(T).attr("transform",d=>`translate(${x(d.frequency)},${y(d.growth)})`))
+        .call(sel => sel.select(".nc-bubble").transition(T)
+          .attr("r",NC_BUBBLE_R)
+          .attr("fill-opacity",d=>ncOpacity(d.growth))
+          .attr("class",d=>`nc-bubble ${d.id===ncSelectedId?"selected":""}`)
+          .attr("stroke",d=>d.id===ncSelectedId?"#fff":"rgba(255,255,255,.85)")
+          .attr("stroke-width",d=>d.id===ncSelectedId?3:1.3)),
+      exit => exit.transition(T)
+        .attr("transform",d=>`translate(${x(d.frequency)},${y(d.growth)})`)
+        .call(sel=>sel.select(".nc-bubble").attr("r",0).attr("fill-opacity",0))
+        .remove()
+    );
+
+  points.select(".nc-bubble")
+    .style("cursor","pointer")
+    .on("click",(event,d)=>{ ncSelectedId=d.id; ncRenderAll(); })
+    .on("mousemove",function(event,d){
+      const tw = 240, pad = 14;
+      let left = event.clientX + 16, top = event.clientY - 16;
+      if(left + tw > window.innerWidth - pad) left = event.clientX - tw - 16;
+      tooltip
+        .style("left", left+"px")
+        .style("top", top+"px")
+        .classed("show",true)
+        .html(`
+          <div class="tt-title">${d.name}</div>
+          <div class="tt-row"><span>Frequency</span><b>${ncFmt(d.frequency)}</b></div>
+          <div class="tt-row"><span>Growth</span><b>${ncPct(d.growth)}</b></div>
+          <div class="tt-row"><span>First detected</span><b>${d.firstDetected}</b></div>
+          <div class="tt-sources">${d.sources.map(s=>`<span class="tt-chip">${s}</span>`).join("")}</div>
+        `);
+      d3.select(this).attr("fill-opacity",Math.min(1,ncOpacity(d.growth)+.12));
+    })
+    .on("mouseleave",function(event,d){
+      tooltip.classed("show",false);
+      d3.select(this).attr("fill-opacity",ncOpacity(d.growth));
+    });
+
+  points.selectAll(".nc-bubble-label").remove();
+  const topByGrowth = new Set([...items].sort((a,b)=>b.growth-a.growth).slice(0,5).map(d=>d.id));
+  const labeled = items.filter(d=>topByGrowth.has(d.id) || d.id===ncSelectedId);
+  // Stagger label height when two labeled bubbles sit close together on the x-axis,
+  // so names don't print on top of each other.
+  const sortedLabeled = [...labeled].sort((a,b)=>x(a.frequency)-x(b.frequency));
+  const labelDy = new Map();
+  let lastX = null, level = 0;
+  sortedLabeled.forEach(d=>{
+    const px = x(d.frequency);
+    level = (lastX!==null && Math.abs(px-lastX) < 140) ? (level===0?1:0) : 0;
+    labelDy.set(d.id, -NC_BUBBLE_R-6-(level*17));
+    lastX = px;
+  });
+
+  points.filter(d=>topByGrowth.has(d.id) || d.id===ncSelectedId)
+    .append("text")
+    .attr("class","nc-bubble-label")
+    .attr("text-anchor","middle")
+    .attr("dy",d=>labelDy.get(d.id))
+    .text(d=>d.name);
+}
+
+function ncSourceSearchUrl(it){
+  const q = encodeURIComponent(`${it.title} ${it.outlet}`);
+  if(it.type === "research") return `https://scholar.google.com/scholar?q=${q}`;
+  if(it.type === "patents") return `https://patents.google.com/?q=${q}`;
+  return `https://news.google.com/search?q=${q}`;
+}
+
+function ncRenderSignalList(d){
+  const wrap = document.getElementById("ncSignalList");
+  const items = [...(d.topItems||[])].sort((a,b)=>b.score-a.score).slice(0,5);
+  const typeColor = {research:"var(--blue)", patents:"var(--gold)", news:"var(--maroon)"};
+  const typeLabel = {research:"Research", patents:"Patent", news:"News"};
+  wrap.innerHTML = items.map(it=>`
+    <div class="nc-signal-item">
+      <span class="nc-signal-dot" style="background:${typeColor[it.type]}"></span>
+      <div class="nc-signal-body">
+        <a class="nc-signal-title" href="${ncSourceSearchUrl(it)}" target="_blank" rel="noopener noreferrer">${it.title}</a>
+        <div class="nc-signal-meta">${typeLabel[it.type]} · ${it.outlet} · ${it.date}</div>
+        <div class="nc-signal-heat-track" title="Relative heat score"><div class="nc-signal-heat-fill" style="width:${it.score}%;background:${typeColor[it.type]}"></div></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function ncRenderDetail(){
+  const raw = ncData.find(x=>x.id===ncSelectedId) || ncData[0];
+  const srcs = raw.sources.filter(s=>ncActiveSources.has(s));
+  const combined = ncCombinedMetric(raw, srcs);
+
+  document.getElementById("ncDetailTitle").textContent=raw.name;
+  document.getElementById("ncDetailLede").textContent=raw.lede;
+  document.getElementById("ncMetricFrequency").textContent=ncFmt(combined.frequency);
+  document.getElementById("ncMetricGrowth").textContent=ncPct(combined.growth);
+  document.getElementById("ncMetricFirstDetected").textContent=raw.firstDetected;
+  document.getElementById("ncWindowNote").textContent=`past year vs. year before`;
+
+  const perSource = {research:ncSourceMetric(raw,"research"), patents:ncSourceMetric(raw,"patents"), news:ncSourceMetric(raw,"news")};
+  const max = Math.max(...["research","patents","news"].map(s=>raw.sources.includes(s)?perSource[s].frequency:0),1);
+  ["research","patents","news"].forEach(s=>{
+    const inThisCombo = raw.sources.includes(s);
+    const isActive = ncActiveSources.has(s) && inThisCombo;
+    const row = document.getElementById("nc"+s.charAt(0).toUpperCase()+s.slice(1)+"Row");
+    if(row) row.classList.toggle("inactive", !isActive);
+    document.getElementById("nc"+s.charAt(0).toUpperCase()+s.slice(1)+"Value").textContent = inThisCombo ? ncPct(perSource[s].growth) : "—";
+    document.getElementById("nc"+s.charAt(0).toUpperCase()+s.slice(1)+"Bar").style.width = inThisCombo ? (Math.max(6,perSource[s].frequency/max*100))+"%" : "0%";
+  });
+
+  ncRenderSignalList(raw);
+}
+
+function ncRenderAll(){
+  ncRenderScatter();
+  ncRenderDetail();
+  ncMatchDetailHeight();
+}
+
+function ncMatchDetailHeight(){
+  const chartCol = document.querySelector(".nc-chart-col");
+  const detailCol = document.getElementById("ncDetail");
+  if(!chartCol || !detailCol) return;
+  if(window.innerWidth < 900){
+    detailCol.style.maxHeight = "";
+    detailCol.style.overflowY = "";
+    return;
+  }
+  const h = chartCol.getBoundingClientRect().height;
+  detailCol.style.maxHeight = h + "px";
+  detailCol.style.overflowY = "auto";
+}
+
+/* ---- Follow the Money: interactive Sankey diagram ---- */
+const FM_SOURCES = [
+  {id:"vc",   name:"Venture Capital",       color:"#A8CBF0"},
+  {id:"corp", name:"Corporate Investment",  color:"#2678d9"},
+  {id:"gov",  name:"Government Grants",     color:"#9E0B33"},
+  {id:"sov",  name:"Sovereign Wealth",      color:"#b48a3b"}
+];
+const FM_TARGETS = [
+  {id:"ai",      name:"AI"},
+  {id:"biotech", name:"Biotech"},
+  {id:"semi",    name:"Semiconductors"},
+  {id:"quantum", name:"Quantum"},
+  {id:"space",   name:"Space"}
+];
+const FM_FLOWS = [
+  {source:"vc",   target:"ai",      value:24},
+  {source:"vc",   target:"biotech", value:10},
+  {source:"vc",   target:"quantum", value:3},
+  {source:"vc",   target:"semi",    value:4},
+  {source:"vc",   target:"space",   value:1},
+  {source:"corp", target:"ai",      value:12},
+  {source:"corp", target:"semi",    value:8},
+  {source:"corp", target:"biotech", value:4},
+  {source:"corp", target:"space",   value:2},
+  {source:"corp", target:"quantum", value:2},
+  {source:"gov",  target:"quantum", value:3},
+  {source:"gov",  target:"semi",    value:3},
+  {source:"gov",  target:"space",   value:3},
+  {source:"gov",  target:"ai",      value:4},
+  {source:"gov",  target:"biotech", value:6},
+  {source:"sov",  target:"ai",      value:6},
+  {source:"sov",  target:"biotech", value:4},
+  {source:"sov",  target:"quantum", value:1}
+];
+const FM_NAVY = "#032342";
+const FM_BASE_OPACITY = 0.34;
+const FM_DIM_OPACITY = 0.08;
+const FM_HOT_OPACITY = 0.88;
+
+function fmRenderSankey(){
+  const svg = d3.select("#fmSankey");
+  const node = svg.node();
+  const wrap = node.closest(".sankey-wrap");
+  const stacked = window.innerWidth < 900; // matches the .es-dashboard grid breakpoint
+
+  // Match "Follow the Money"'s total box height to "New Vocabulary" (its sibling in the
+  // es-dashboard row) by forcing the wrap to that exact height. The SVG is flex:1 inside
+  // the wrap (see CSS), so the browser's own flex layout — not manual subtraction — gives
+  // it exactly the space left over after the heading, subtitle, and legend. We just read
+  // the result back.
+  const refBox = document.getElementById("vocabBox");
+  if(!stacked && refBox && wrap){
+    wrap.style.height = refBox.getBoundingClientRect().height + "px";
+  } else if(wrap){
+    wrap.style.height = "";
+  }
+
+  const width = node.clientWidth || 900;
+  const isNarrowSvg = width < 460;
+  const height = Math.max(240, node.clientHeight || 420);
+  svg.attr("height", height);
+
+  const margin = isNarrowSvg
+    ? {top:20, right:20, bottom:20, left:20}
+    : {top:20, right:148, bottom:20, left:178};
+  const innerW = Math.max(10, width - margin.left - margin.right);
+  const innerH = height - margin.top - margin.bottom;
+  const barW = 16;
+  const gap = 11;
+
+  const sourceTotal = id => d3.sum(FM_FLOWS.filter(f=>f.source===id), f=>f.value);
+  const targetTotal = id => d3.sum(FM_FLOWS.filter(f=>f.target===id), f=>f.value);
+  const totalValue = d3.sum(FM_FLOWS, f=>f.value);
+
+  const sourceScale = (innerH - (FM_SOURCES.length-1)*gap) / totalValue;
+  const targetScale = (innerH - (FM_TARGETS.length-1)*gap) / totalValue;
+
+  let cum = 0;
+  const sourceBand = {};
+  FM_SOURCES.forEach(s=>{
+    const h = sourceTotal(s.id)*sourceScale;
+    sourceBand[s.id] = {y0:cum, h};
+    cum += h + gap;
+  });
+  cum = 0;
+  const targetBand = {};
+  FM_TARGETS.forEach(t=>{
+    const h = targetTotal(t.id)*targetScale;
+    targetBand[t.id] = {y0:cum, h};
+    cum += h + gap;
+  });
+
+  const sourceOrder = Object.fromEntries(FM_SOURCES.map((s,i)=>[s.id,i]));
+  const targetOrder = Object.fromEntries(FM_TARGETS.map((t,i)=>[t.id,i]));
+
+  const flows = FM_FLOWS.map(f=>Object.assign({}, f));
+  const sourceCursor = {}; FM_SOURCES.forEach(s=>sourceCursor[s.id]=sourceBand[s.id].y0);
+  const targetCursor = {}; FM_TARGETS.forEach(t=>targetCursor[t.id]=targetBand[t.id].y0);
+
+  FM_SOURCES.forEach(s=>{
+    flows.filter(f=>f.source===s.id).sort((a,b)=>targetOrder[a.target]-targetOrder[b.target]).forEach(f=>{
+      const h = f.value*sourceScale;
+      f._sy0 = sourceCursor[s.id]; f._sy1 = f._sy0+h;
+      sourceCursor[s.id] += h;
+    });
+  });
+  FM_TARGETS.forEach(t=>{
+    flows.filter(f=>f.target===t.id).sort((a,b)=>sourceOrder[a.source]-sourceOrder[b.source]).forEach(f=>{
+      const h = f.value*targetScale;
+      f._ty0 = targetCursor[t.id]; f._ty1 = f._ty0+h;
+      targetCursor[t.id] += h;
+    });
+  });
+
+  const x0 = margin.left + barW;
+  const x1 = margin.left + innerW - barW;
+  const xMid = (x0+x1)/2;
+
+  // Small nodes (e.g. Quantum, Space) can have bands too short to fit a two-line label
+  // without overlapping their neighbor. Compute label centers separately from the true
+  // (value-proportional) band geometry, nudging apart any that sit closer than a readable
+  // minimum — the bars stay accurate; only the text position is adjusted.
+  function resolveLabelCenters(order, bandMap, minGap){
+    const centers = order.map(id => bandMap[id].y0 + bandMap[id].h/2);
+    for(let i=1;i<centers.length;i++){
+      if(centers[i]-centers[i-1] < minGap) centers[i] = centers[i-1]+minGap;
+    }
+    const overflow = centers[centers.length-1] - (order.length?bandMap[order[order.length-1]].y0+bandMap[order[order.length-1]].h:0);
+    if(overflow > 0) for(let i=0;i<centers.length;i++) centers[i] -= overflow;
+    const out = {};
+    order.forEach((id,i)=> out[id]=centers[i]);
+    return out;
+  }
+  const sourceLabelY = resolveLabelCenters(FM_SOURCES.map(s=>s.id), sourceBand, 32);
+  const targetLabelY = resolveLabelCenters(FM_TARGETS.map(t=>t.id), targetBand, 32);
+
+  function ribbonPath(f){
+    const sy0=margin.top+f._sy0, sy1=margin.top+f._sy1, ty0=margin.top+f._ty0, ty1=margin.top+f._ty1;
+    return `M${x0},${sy0} C${xMid},${sy0} ${xMid},${ty0} ${x1},${ty0} L${x1},${ty1} C${xMid},${ty1} ${xMid},${sy1} ${x0},${sy1} Z`;
+  }
+
+  svg.selectAll("*").remove();
+  const g = svg.append("g");
+  const tooltip = d3.select("#fmTooltip");
+  const fmt = v => "$" + v + "B";
+
+  function showTooltip(event, html){
+    const tw = 240, pad = 14;
+    let left = event.clientX + 16, top = event.clientY - 16;
+    if(left + tw > window.innerWidth - pad) left = event.clientX - tw - 16;
+    tooltip.style("left",left+"px").style("top",top+"px").classed("show",true).html(html);
+  }
+  function hideTooltip(){ tooltip.classed("show",false); }
+
+  const ribbons = g.selectAll(".fm-ribbon").data(flows).join("path")
+    .attr("class","fm-ribbon")
+    .attr("d",ribbonPath)
+    .attr("fill",f=>FM_SOURCES.find(s=>s.id===f.source).color)
+    .attr("fill-opacity",FM_BASE_OPACITY)
+    .attr("stroke","none");
+
+  const sourceRects = g.selectAll(".fm-source-rect").data(FM_SOURCES).join("rect")
+    .attr("class","fm-node-rect fm-source-rect")
+    .attr("x",margin.left).attr("y",d=>margin.top+sourceBand[d.id].y0)
+    .attr("width",barW).attr("height",d=>sourceBand[d.id].h)
+    .attr("rx",3).attr("fill",d=>d.color);
+
+  if(!isNarrowSvg){
+    g.selectAll(".fm-source-label").data(FM_SOURCES).join("text")
+      .attr("class","fm-node-label").attr("text-anchor","end")
+      .attr("x",margin.left-14).attr("y",d=>margin.top+sourceLabelY[d.id]-6)
+      .text(d=>d.name);
+    g.selectAll(".fm-source-value").data(FM_SOURCES).join("text")
+      .attr("class","fm-node-value").attr("text-anchor","end")
+      .attr("x",margin.left-14).attr("y",d=>margin.top+sourceLabelY[d.id]+10)
+      .text(d=>fmt(sourceTotal(d.id)));
+  }
+
+  const targetRects = g.selectAll(".fm-target-rect").data(FM_TARGETS).join("rect")
+    .attr("class","fm-node-rect fm-target-rect")
+    .attr("x",x1).attr("y",d=>margin.top+targetBand[d.id].y0)
+    .attr("width",barW).attr("height",d=>targetBand[d.id].h)
+    .attr("rx",3).attr("fill",FM_NAVY);
+
+  if(!isNarrowSvg){
+    g.selectAll(".fm-target-label").data(FM_TARGETS).join("text")
+      .attr("class","fm-node-label").attr("text-anchor","start")
+      .attr("x",x1+barW+14).attr("y",d=>margin.top+targetLabelY[d.id]-6)
+      .text(d=>d.name);
+    g.selectAll(".fm-target-value").data(FM_TARGETS).join("text")
+      .attr("class","fm-node-value").attr("text-anchor","start")
+      .attr("x",x1+barW+14).attr("y",d=>margin.top+targetLabelY[d.id]+10)
+      .text(d=>fmt(targetTotal(d.id)));
+  }
+
+  ribbons
+    .on("mousemove",(event,f)=>{
+      ribbons.attr("fill-opacity",r=>r===f?FM_HOT_OPACITY:FM_DIM_OPACITY);
+      const sName = FM_SOURCES.find(s=>s.id===f.source).name;
+      const tName = FM_TARGETS.find(t=>t.id===f.target).name;
+      showTooltip(event, `
+        <div class="tt-title">${sName} &rarr; ${tName}</div>
+        <div class="tt-row"><span>Amount</span><b>${fmt(f.value)}</b></div>
+        <div class="tt-row"><span>Share of ${sName}</span><b>${Math.round(f.value/sourceTotal(f.source)*100)}%</b></div>
+        <div class="tt-row"><span>Share of ${tName}</span><b>${Math.round(f.value/targetTotal(f.target)*100)}%</b></div>
+      `);
+    })
+    .on("mouseleave",()=>{
+      ribbons.attr("fill-opacity",FM_BASE_OPACITY);
+      hideTooltip();
+    });
+
+  sourceRects
+    .on("mousemove",(event,d)=>{
+      ribbons.attr("fill-opacity",f=>f.source===d.id?FM_HOT_OPACITY:FM_DIM_OPACITY);
+      showTooltip(event, `
+        <div class="tt-title">${d.name}</div>
+        <div class="tt-row"><span>Total invested</span><b>${fmt(sourceTotal(d.id))}</b></div>
+        <div class="tt-row"><span>Share of all capital</span><b>${Math.round(sourceTotal(d.id)/totalValue*100)}%</b></div>
+      `);
+    })
+    .on("mouseleave",()=>{ ribbons.attr("fill-opacity",FM_BASE_OPACITY); hideTooltip(); });
+
+  targetRects
+    .on("mousemove",(event,d)=>{
+      ribbons.attr("fill-opacity",f=>f.target===d.id?FM_HOT_OPACITY:FM_DIM_OPACITY);
+      showTooltip(event, `
+        <div class="tt-title">${d.name}</div>
+        <div class="tt-row"><span>Total received</span><b>${fmt(targetTotal(d.id))}</b></div>
+        <div class="tt-row"><span>Share of all capital</span><b>${Math.round(targetTotal(d.id)/totalValue*100)}%</b></div>
+      `);
+    })
+    .on("mouseleave",()=>{ ribbons.attr("fill-opacity",FM_BASE_OPACITY); hideTooltip(); });
+}
+
+let fmInitialized = false;
+function fmInit(){
+  if(!fmInitialized){
+    fmInitialized = true;
+    window.addEventListener("resize",()=>{
+      if(document.getElementById("page-signals").style.display !== "none") fmRenderSankey();
+    });
+  }
+  fmRenderSankey();
+}
+
+function ncInit(){
+  if(!ncInitialized){
+    ncInitialized = true;
+    document.querySelectorAll("#ncSrcResearch,#ncSrcPatents,#ncSrcNews").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const s=btn.dataset.source;
+        if(ncActiveSources.has(s)){
+          if(ncActiveSources.size===1) return;
+          ncActiveSources.delete(s);
+          btn.classList.remove("active");
+        }else{
+          ncActiveSources.add(s);
+          btn.classList.add("active");
+        }
+        const visible = ncFilteredData();
+        if(!visible.find(d=>d.id===ncSelectedId) && visible.length){
+          ncSelectedId = visible[0].id;
+        }
+        ncRenderAll();
+      });
+    });
+    document.getElementById("ncMinfreq").addEventListener("change",()=>{
+      const visible = ncFilteredData();
+      if(!visible.find(d=>d.id===ncSelectedId) && visible.length){
+        ncSelectedId = visible[0].id;
+      }
+      ncRenderAll();
+    });
+    document.getElementById("ncRefresh").addEventListener("click",()=>{
+      document.getElementById("ncStatusText").textContent="Demo data · refreshed just now";
+      ncRenderAll();
+    });
+    window.addEventListener("resize",()=>{
+      if(document.getElementById("page-signals").style.display !== "none") ncRenderAll();
+    });
+  }
+  ncRenderAll();
+}
+
 /* ---- Single-page router: swaps visible page sections instead of real navigation ---- */
 const FILE_TO_KEY = {
   'tech_futures_lab_navy.html': 'home',
@@ -1808,6 +2661,12 @@ function showPage(key, queryString){
   window.scrollTo(0, 0);
   if (key === 'research' && typeof initResearchPage === 'function') {
     initResearchPage(queryString || '');
+  }
+  if (key === 'signals' && typeof ncInit === 'function') {
+    ncInit();
+  }
+  if (key === 'signals' && typeof fmInit === 'function') {
+    fmInit();
   }
 }
 
